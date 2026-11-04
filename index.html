@@ -15,26 +15,96 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header>
+  <header class="app-header">
     <h1>Guru Box</h1>
     <p class="subtitle">Control de alumnos</p>
   </header>
 
+  <!-- Navegación -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="alumnos">Alumnos</button>
+    <button class="tab" data-tab="vencimientos">Vencimientos</button>
+    <button class="tab" data-tab="agregar">+ Agregar</button>
+  </nav>
+
   <main>
-    <section class="card">
-      <h2>Bienvenido</h2>
-      <p>Esta es la base de la aplicación del gimnasio.</p>
-      <p>Pronto vas a poder gestionar alumnos, vencimientos y recibir avisos por Telegram.</p>
+    <!-- TAB: Lista de alumnos -->
+    <section id="tab-alumnos" class="tab-content active">
+      <div class="search-box">
+        <input type="search" id="buscar" placeholder="Buscar alumno..." autocomplete="off" />
+      </div>
+      <div id="lista-alumnos" class="lista">
+        <!-- Se llena con JS -->
+      </div>
+      <p id="sin-alumnos" class="empty-state hidden">Todavía no hay alumnos cargados.</p>
+    </section>
+
+    <!-- TAB: Vencimientos -->
+    <section id="tab-vencimientos" class="tab-content">
+      <div class="filtros">
+        <button class="filtro active" data-filtro="todos">Todos</button>
+        <button class="filtro" data-filtro="vencidos">Vencidos</button>
+        <button class="filtro" data-filtro="proximos">Próximos 5 días</button>
+      </div>
+      <div id="lista-vencimientos" class="lista">
+        <!-- Se llena con JS -->
+      </div>
+      <p id="sin-vencimientos" class="empty-state hidden">No hay vencimientos para mostrar.</p>
+    </section>
+
+    <!-- TAB: Agregar alumno -->
+    <section id="tab-agregar" class="tab-content">
+      <form id="form-alumno" class="form">
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" required placeholder="Ej: Juan Pérez" />
+        </div>
+
+        <div class="field">
+          <label for="telefono">Teléfono (opcional)</label>
+          <input type="tel" id="telefono" placeholder="11-1234-5678" />
+        </div>
+
+        <div class="field">
+          <label for="plan">Plan</label>
+          <select id="plan">
+            <option value="Mensual">Mensual</option>
+            <option value="Trimestral">Trimestral</option>
+            <option value="Semestral">Semestral</option>
+            <option value="Anual">Anual</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="fechaInicio">Fecha de inicio</label>
+          <input type="date" id="fechaInicio" required />
+        </div>
+
+        <div class="field">
+          <label for="fechaVencimiento">Fecha de vencimiento</label>
+          <input type="date" id="fechaVencimiento" required />
+        </div>
+
+        <div class="field">
+          <label for="notas">Notas (opcional)</label>
+          <textarea id="notas" rows="2" placeholder="Lesiones, objetivos, etc."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Guardar alumno</button>
+      </form>
     </section>
   </main>
+
+  <!-- Toast de confirmación -->
+  <div id="toast" class="toast hidden"></div>
 
   <script src="js/app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker registrado', reg.scope))
-          .catch(err => console.log('Error al registrar SW', err));
+          .then(reg => console.log('SW registrado', reg.scope))
+          .catch(err => console.log('Error SW', err));
       });
     }
   </script>
