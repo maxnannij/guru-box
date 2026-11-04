@@ -1,10 +1,12 @@
-const CACHE_NAME = 'guru-box-v1';
+const CACHE_NAME = 'guru-box-v2';
+const BASE = '/guru-box';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
-  '/manifest.json'
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/css/styles.css',
+  BASE + '/js/app.js',
+  BASE + '/manifest.json',
+  BASE + '/icons/icon.svg'
 ];
 
 self.addEventListener('install', (event) => {
