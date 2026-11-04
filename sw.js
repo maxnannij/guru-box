@@ -1,4 +1,4 @@
-const CACHE_NAME = 'guru-box-v2';
+const CACHE_NAME = 'guru-box-v3';
 const BASE = '/guru-box';
 const ASSETS = [
   BASE + '/',
